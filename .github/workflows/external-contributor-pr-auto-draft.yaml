@@ -9,8 +9,7 @@ permissions: {}
 jobs:
   dispatch:
     if: |
-      vars.TWENTY_WORKFLOW_DISPATCHER_CLIENT_ID != '' &&
-      secrets.TWENTY_WORKFLOW_DISPATCHER_PRIVATE_KEY != '' &&
+      github.repository_owner == 'twentyhq' &&
       github.event.pull_request.draft == false &&
       github.event.pull_request.author_association != 'MEMBER' &&
       github.event.pull_request.author_association != 'OWNER' &&

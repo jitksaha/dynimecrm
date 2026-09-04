@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   dispatch-breaking-changes:
-    if: github.event.workflow_run.conclusion == 'success'
+    if: github.repository_owner == 'twentyhq' && github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -63,7 +63,7 @@ jobs:
 
       - name: Mint twenty-factory dispatch token
         id: app-token
-        if: steps.pr-info.outputs.has_pr == 'true' && vars.TWENTY_WORKFLOW_DISPATCHER_CLIENT_ID != '' && secrets.TWENTY_WORKFLOW_DISPATCHER_PRIVATE_KEY != ''
+        if: steps.pr-info.outputs.has_pr == 'true'
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
           client-id: ${{ vars.TWENTY_WORKFLOW_DISPATCHER_CLIENT_ID }}
@@ -73,7 +73,7 @@ jobs:
           permission-actions: write
 
       - name: Dispatch to twenty-factory
-        if: steps.pr-info.outputs.has_pr == 'true' && vars.TWENTY_WORKFLOW_DISPATCHER_CLIENT_ID != '' && secrets.TWENTY_WORKFLOW_DISPATCHER_PRIVATE_KEY != ''
+        if: steps.pr-info.outputs.has_pr == 'true'
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
           PR_NUMBER: ${{ steps.pr-info.outputs.pr_number }}

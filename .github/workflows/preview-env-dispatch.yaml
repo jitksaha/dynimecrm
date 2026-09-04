@@ -21,8 +21,7 @@ concurrency:
 jobs:
   trigger-preview:
     if: |
-      vars.TWENTY_WORKFLOW_DISPATCHER_CLIENT_ID != '' &&
-      secrets.TWENTY_WORKFLOW_DISPATCHER_PRIVATE_KEY != '' &&
+      github.repository_owner == 'twentyhq' &&
       ((github.event.action == 'labeled' && github.event.label.name == 'preview-app') ||
       (
         (
