@@ -16,6 +16,7 @@ jobs:
 
   deploy-main:
     needs: website-changed-files
+    if: vars.TWENTY_WORKFLOW_DISPATCHER_CLIENT_ID != '' && secrets.TWENTY_WORKFLOW_DISPATCHER_PRIVATE_KEY != ''
     timeout-minutes: 3
     runs-on: ubuntu-latest
     steps:

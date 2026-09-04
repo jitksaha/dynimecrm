@@ -21,6 +21,8 @@ jobs:
     # Same fork PRs from outside the org don't have `secrets.*` so the dispatch
     # call would fail anyway — skip explicitly to avoid noise.
     if: |
+      vars.TWENTY_WORKFLOW_DISPATCHER_CLIENT_ID != '' &&
+      secrets.TWENTY_WORKFLOW_DISPATCHER_PRIVATE_KEY != '' &&
       github.event.pull_request.head.repo.full_name == github.repository &&
       github.event.action != 'closed' && (
         (github.event.action == 'labeled' && github.event.label.name == 'preview-website') ||
@@ -64,6 +66,8 @@ jobs:
     # `maxVersionAgeDays: 14` + `maxNumberOfVersions: 50` auto-pruning in
     # open-next.config.ts, so nothing leaks even if cleanup never runs.
     if: |
+      vars.TWENTY_WORKFLOW_DISPATCHER_CLIENT_ID != '' &&
+      secrets.TWENTY_WORKFLOW_DISPATCHER_PRIVATE_KEY != '' &&
       github.event.pull_request.head.repo.full_name == github.repository &&
       github.event.action == 'closed'
     runs-on: ubuntu-latest

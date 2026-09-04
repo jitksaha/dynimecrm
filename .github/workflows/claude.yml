@@ -185,7 +185,7 @@ jobs:
             }
       - name: Mint twenty-factory dispatch token
         id: app-token
-        if: always()
+        if: always() && vars.TWENTY_WORKFLOW_DISPATCHER_CLIENT_ID != '' && secrets.TWENTY_WORKFLOW_DISPATCHER_PRIVATE_KEY != ''
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
           client-id: ${{ vars.TWENTY_WORKFLOW_DISPATCHER_CLIENT_ID }}
@@ -195,7 +195,7 @@ jobs:
           permission-actions: write
 
       - name: Dispatch response to twenty-factory
-        if: always()
+        if: always() && vars.TWENTY_WORKFLOW_DISPATCHER_CLIENT_ID != '' && secrets.TWENTY_WORKFLOW_DISPATCHER_PRIVATE_KEY != ''
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
           REPO: ${{ steps.prompt.outputs.repo }}
