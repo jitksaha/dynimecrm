@@ -53,7 +53,7 @@
   "version": "0.2.1",
   "nx": {},
   "scripts": {
-    "build": "npx nx run-many -t build -p twenty-shared twenty-server twenty-front && mkdir -p packages/twenty-server/dist/front && cp -r packages/twenty-front/build/* packages/twenty-server/dist/front/",
+    "build": "[ -d packages/twenty-server/dist/front ] && echo 'Using pre-built bundle' || (npx nx run-many -t build -p twenty-shared twenty-server twenty-front && mkdir -p packages/twenty-server/dist/front && cp -r packages/twenty-front/build/* packages/twenty-server/dist/front/)",
     "docs:generate": "tsx packages/twenty-docs/scripts/generate-docs-json.ts",
     "docs:generate-navigation-template": "tsx packages/twenty-docs/scripts/generate-navigation-template.ts",
     "docs:generate-paths": "tsx packages/twenty-docs/scripts/generate-documentation-paths.ts",
