@@ -1,0 +1,2 @@
+export declare const getViewLayoutFromViewType: (viewType: "CALENDAR" | "CALENDAR_WIDGET" | "FIELDS_WIDGET" | "KANBAN" | "KANBAN_WIDGET" | "LIST" | "LIST_WIDGET" | "TABLE" | "TABLE_WIDGET") => "CALENDAR" | "CALENDAR_WIDGET" | "FIELDS_WIDGET" | "KANBAN" | "KANBAN_WIDGET" | "LIST" | "LIST_WIDGET" | "TABLE" | "TABLE_WIDGET";
+//# sourceMappingURL=getViewLayoutFromViewType.d.ts.map

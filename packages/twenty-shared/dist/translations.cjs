@@ -1,0 +1,1 @@
+Object.defineProperties(exports,{__esModule:{value:!0},[Symbol.toStringTag]:{value:`Module`}});const e=require("./SourceLocale-DjEYDl2_.js"),t=require("./AppLocales-Dxnzd1EL.js");exports.APP_LOCALES=t.t,exports.SOURCE_LOCALE=e.t;

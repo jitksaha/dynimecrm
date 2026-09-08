@@ -1,0 +1,25 @@
+export declare enum ApiPath {
+    AdminPanel = "admin-panel",
+    App = "app",
+    ApplicationRegistrationClaim = "application-registration-claim",
+    Apps = "apps",
+    Auth = "auth",
+    ClientConfig = "client-config",
+    Cloudflare = "cloudflare",
+    Emailing = "emailing",
+    File = "file",
+    FileUpload = "file-upload",
+    Files = "files",
+    GraphQL = "graphql",
+    Health = "healthz",
+    Mcp = "mcp",
+    Metadata = "metadata",
+    OAuth = "oauth",
+    OpenApi = "open-api",
+    PublicAssets = "public-assets",
+    Rest = "rest",
+    RouteTrigger = "s",
+    Webhooks = "webhooks",
+    WellKnown = ".well-known"
+}
+//# sourceMappingURL=ApiPath.d.ts.map

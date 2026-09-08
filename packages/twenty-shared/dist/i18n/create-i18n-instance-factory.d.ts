@@ -1,0 +1,5 @@
+import { type I18n, type Messages } from '@lingui/core';
+import { type AppLocale } from '../translations/constants/AppLocales';
+export type LocaleMessagesMap = Partial<Record<AppLocale, Messages>>;
+export declare const createI18nInstanceFactory: (messagesByLocale: Partial<Record<"af-ZA" | "ar-SA" | "ca-ES" | "cs-CZ" | "da-DK" | "de-DE" | "el-GR" | "en" | "es-ES" | "fi-FI" | "fr-FR" | "he-IL" | "hu-HU" | "it-IT" | "ja-JP" | "ko-KR" | "nl-NL" | "no-NO" | "pl-PL" | "pseudo-en" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sr-Cyrl" | "sv-SE" | "tr-TR" | "uk-UA" | "vi-VN" | "zh-CN" | "zh-TW", Messages>>) => (locale: "af-ZA" | "ar-SA" | "ca-ES" | "cs-CZ" | "da-DK" | "de-DE" | "el-GR" | "en" | "es-ES" | "fi-FI" | "fr-FR" | "he-IL" | "hu-HU" | "it-IT" | "ja-JP" | "ko-KR" | "nl-NL" | "no-NO" | "pl-PL" | "pseudo-en" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sr-Cyrl" | "sv-SE" | "tr-TR" | "uk-UA" | "vi-VN" | "zh-CN" | "zh-TW") => I18n;
+//# sourceMappingURL=create-i18n-instance-factory.d.ts.map

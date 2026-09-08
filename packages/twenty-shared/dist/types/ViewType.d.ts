@@ -1,0 +1,12 @@
+export declare enum ViewType {
+    TABLE = "TABLE",
+    KANBAN = "KANBAN",
+    CALENDAR = "CALENDAR",
+    LIST = "LIST",
+    FIELDS_WIDGET = "FIELDS_WIDGET",
+    TABLE_WIDGET = "TABLE_WIDGET",
+    KANBAN_WIDGET = "KANBAN_WIDGET",
+    LIST_WIDGET = "LIST_WIDGET",
+    CALENDAR_WIDGET = "CALENDAR_WIDGET"
+}
+//# sourceMappingURL=ViewType.d.ts.map

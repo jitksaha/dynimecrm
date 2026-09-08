@@ -1,0 +1,2 @@
+export declare const interpolateMessagePlaceholders: (message: string, values?: Record<string, string | number | undefined> | undefined) => string;
+//# sourceMappingURL=interpolate-message-placeholders.d.ts.map

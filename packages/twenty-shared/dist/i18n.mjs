@@ -1,0 +1,1413 @@
+import { t as e } from "./isDefined-Dtu5EYqP.mjs";
+import "./SourceLocale-CfovCqKy.mjs";
+import { t } from "./capitalize-BIrP8_oc.mjs";
+//#region \0rolldown/runtime.js
+var n = (e, t) => () => (t || (e((t = { exports: {} }).exports, t), e = null), t.exports), r = /* @__PURE__ */ n(((e, t) => {
+	(function(e, n) {
+		typeof define == "function" && define.amd ? define([], n) : typeof t == "object" && t.exports ? t.exports = n() : e.moo = n();
+	})(e, function() {
+		var e = Object.prototype.hasOwnProperty, t = Object.prototype.toString, n = typeof (/* @__PURE__ */ RegExp()).sticky == "boolean";
+		function r(e) {
+			return e && t.call(e) === "[object RegExp]";
+		}
+		function i(e) {
+			return e && typeof e == "object" && !r(e) && !Array.isArray(e);
+		}
+		function a(e) {
+			return e.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+		}
+		function o(e) {
+			return RegExp("|" + e).exec("").length - 1;
+		}
+		function s(e) {
+			return "(" + e + ")";
+		}
+		function c(e) {
+			return e.length ? "(?:" + e.map(function(e) {
+				return "(?:" + e + ")";
+			}).join("|") + ")" : "(?!)";
+		}
+		function l(e) {
+			if (typeof e == "string") return "(?:" + a(e) + ")";
+			if (r(e)) {
+				if (e.ignoreCase) throw Error("RegExp /i flag not allowed");
+				if (e.global) throw Error("RegExp /g flag is implied");
+				if (e.sticky) throw Error("RegExp /y flag is implied");
+				if (e.multiline) throw Error("RegExp /m flag is implied");
+				return e.source;
+			} else throw Error("Not a pattern: " + e);
+		}
+		function u(e, t) {
+			return e.length > t ? e : Array(t - e.length + 1).join(" ") + e;
+		}
+		function d(e, t) {
+			for (var n = e.length, r = 0;;) {
+				var i = e.lastIndexOf("\n", n - 1);
+				if (i === -1 || (r++, n = i, r === t) || n === 0) break;
+			}
+			var a = r < t ? 0 : n + 1;
+			return e.substring(a).split("\n");
+		}
+		function f(e) {
+			for (var t = Object.getOwnPropertyNames(e), n = [], r = 0; r < t.length; r++) {
+				var a = t[r], o = e[a], s = [].concat(o);
+				if (a === "include") {
+					for (var c = 0; c < s.length; c++) n.push({ include: s[c] });
+					continue;
+				}
+				var l = [];
+				s.forEach(function(e) {
+					i(e) ? (l.length && n.push(m(a, l)), n.push(m(a, e)), l = []) : l.push(e);
+				}), l.length && n.push(m(a, l));
+			}
+			return n;
+		}
+		function p(e) {
+			for (var t = [], n = 0; n < e.length; n++) {
+				var r = e[n];
+				if (r.include) {
+					for (var i = [].concat(r.include), a = 0; a < i.length; a++) t.push({ include: i[a] });
+					continue;
+				}
+				if (!r.type) throw Error("Rule has no type: " + JSON.stringify(r));
+				t.push(m(r.type, r));
+			}
+			return t;
+		}
+		function m(t, n) {
+			if (i(n) || (n = { match: n }), n.include) throw Error("Matching rules cannot also include states");
+			var a = {
+				defaultType: t,
+				lineBreaks: !!n.error || !!n.fallback,
+				pop: !1,
+				next: null,
+				push: null,
+				error: !1,
+				fallback: !1,
+				value: null,
+				type: null,
+				shouldThrow: !1
+			};
+			for (var o in n) e.call(n, o) && (a[o] = n[o]);
+			if (typeof a.type == "string" && t !== a.type) throw Error("Type transform cannot be a string (type '" + a.type + "' for token '" + t + "')");
+			var s = a.match;
+			return a.match = Array.isArray(s) ? s : s ? [s] : [], a.match.sort(function(e, t) {
+				return r(e) && r(t) ? 0 : r(t) ? -1 : r(e) ? 1 : t.length - e.length;
+			}), a;
+		}
+		function h(e) {
+			return Array.isArray(e) ? p(e) : f(e);
+		}
+		var g = m("error", {
+			lineBreaks: !0,
+			shouldThrow: !0
+		});
+		function _(e, t) {
+			for (var i = null, a = Object.create(null), u = !0, d = null, f = [], p = [], m = 0; m < e.length; m++) e[m].fallback && (u = !1);
+			for (var m = 0; m < e.length; m++) {
+				var h = e[m];
+				if (h.include) throw Error("Inheritance is not allowed in stateless lexers");
+				if (h.error || h.fallback) {
+					if (i) throw !h.fallback == !i.fallback ? Error("Multiple " + (h.fallback ? "fallback" : "error") + " rules not allowed (for token '" + h.defaultType + "')") : Error("fallback and error are mutually exclusive (for token '" + h.defaultType + "')");
+					i = h;
+				}
+				var _ = h.match.slice();
+				if (u) for (; _.length && typeof _[0] == "string" && _[0].length === 1;) {
+					var v = _.shift();
+					a[v.charCodeAt(0)] = h;
+				}
+				if (h.pop || h.push || h.next) {
+					if (!t) throw Error("State-switching options are not allowed in stateless lexers (for token '" + h.defaultType + "')");
+					if (h.fallback) throw Error("State-switching options are not allowed on fallback tokens (for token '" + h.defaultType + "')");
+				}
+				if (_.length !== 0) {
+					u = !1, f.push(h);
+					for (var y = 0; y < _.length; y++) {
+						var b = _[y];
+						if (r(b)) {
+							if (d === null) d = b.unicode;
+							else if (d !== b.unicode && h.fallback === !1) throw Error("If one rule is /u then all must be");
+						}
+					}
+					var x = c(_.map(l)), S = new RegExp(x);
+					if (S.test("")) throw Error("RegExp matches empty string: " + S);
+					if (o(x) > 0) throw Error("RegExp has capture groups: " + S + "\nUse (?: … ) instead");
+					if (!h.lineBreaks && S.test("\n")) throw Error("Rule should declare lineBreaks: " + S);
+					p.push(s(x));
+				}
+			}
+			var C = i && i.fallback, w = n && !C ? "ym" : "gm", T = n || C ? "" : "|";
+			return d === !0 && (w += "u"), {
+				regexp: new RegExp(c(p) + T, w),
+				groups: f,
+				fast: a,
+				error: i || g
+			};
+		}
+		function v(e) {
+			return new S({ start: _(h(e)) }, "start");
+		}
+		function y(e, t, n) {
+			var r = e && (e.push || e.next);
+			if (r && !n[r]) throw Error("Missing state '" + r + "' (in token '" + e.defaultType + "' of state '" + t + "')");
+			if (e && e.pop && +e.pop != 1) throw Error("pop must be 1 (in token '" + e.defaultType + "' of state '" + t + "')");
+		}
+		function b(e, t) {
+			var n = e.$all ? h(e.$all) : [];
+			delete e.$all;
+			var r = Object.getOwnPropertyNames(e);
+			t ||= r[0];
+			for (var i = Object.create(null), a = 0; a < r.length; a++) {
+				var o = r[a];
+				i[o] = h(e[o]).concat(n);
+			}
+			for (var a = 0; a < r.length; a++) for (var o = r[a], s = i[o], c = Object.create(null), l = 0; l < s.length; l++) {
+				var u = s[l];
+				if (u.include) {
+					var d = [l, 1];
+					if (u.include !== o && !c[u.include]) {
+						c[u.include] = !0;
+						var f = i[u.include];
+						if (!f) throw Error("Cannot include nonexistent state '" + u.include + "' (in state '" + o + "')");
+						for (var p = 0; p < f.length; p++) {
+							var m = f[p];
+							s.indexOf(m) === -1 && d.push(m);
+						}
+					}
+					s.splice.apply(s, d), l--;
+				}
+			}
+			for (var g = Object.create(null), a = 0; a < r.length; a++) {
+				var o = r[a];
+				g[o] = _(i[o], !0);
+			}
+			for (var a = 0; a < r.length; a++) {
+				for (var v = r[a], b = g[v], x = b.groups, l = 0; l < x.length; l++) y(x[l], v, g);
+				for (var C = Object.getOwnPropertyNames(b.fast), l = 0; l < C.length; l++) y(b.fast[C[l]], v, g);
+			}
+			return new S(g, t);
+		}
+		function x(e) {
+			for (var t = typeof Map < "u", n = t ? /* @__PURE__ */ new Map() : Object.create(null), r = Object.getOwnPropertyNames(e), i = 0; i < r.length; i++) {
+				var a = r[i], o = e[a];
+				(Array.isArray(o) ? o : [o]).forEach(function(e) {
+					if (typeof e != "string") throw Error("keyword must be string (in keyword '" + a + "')");
+					t ? n.set(e, a) : n[e] = a;
+				});
+			}
+			return function(e) {
+				return t ? n.get(e) : n[e];
+			};
+		}
+		var S = function(e, t) {
+			this.startState = t, this.states = e, this.buffer = "", this.stack = [], this.reset();
+		};
+		S.prototype.reset = function(e, t) {
+			return this.buffer = e || "", this.index = 0, this.line = t ? t.line : 1, this.col = t ? t.col : 1, this.queuedToken = t ? t.queuedToken : null, this.queuedText = t ? t.queuedText : "", this.queuedThrow = t ? t.queuedThrow : null, this.setState(t ? t.state : this.startState), this.stack = t && t.stack ? t.stack.slice() : [], this;
+		}, S.prototype.save = function() {
+			return {
+				line: this.line,
+				col: this.col,
+				state: this.state,
+				stack: this.stack.slice(),
+				queuedToken: this.queuedToken,
+				queuedText: this.queuedText,
+				queuedThrow: this.queuedThrow
+			};
+		}, S.prototype.setState = function(e) {
+			if (!(!e || this.state === e)) {
+				this.state = e;
+				var t = this.states[e];
+				this.groups = t.groups, this.error = t.error, this.re = t.regexp, this.fast = t.fast;
+			}
+		}, S.prototype.popState = function() {
+			this.setState(this.stack.pop());
+		}, S.prototype.pushState = function(e) {
+			this.stack.push(this.state), this.setState(e);
+		};
+		var C = n ? function(e, t) {
+			return e.exec(t);
+		} : function(e, t) {
+			var n = e.exec(t);
+			return n[0].length === 0 ? null : n;
+		};
+		S.prototype._getGroup = function(e) {
+			for (var t = this.groups.length, n = 0; n < t; n++) if (e[n + 1] !== void 0) return this.groups[n];
+			throw Error("Cannot find token type for matched text");
+		};
+		function w() {
+			return this.value;
+		}
+		if (S.prototype.next = function() {
+			var e = this.index;
+			if (this.queuedGroup) {
+				var t = this._token(this.queuedGroup, this.queuedText, e);
+				return this.queuedGroup = null, this.queuedText = "", t;
+			}
+			var n = this.buffer;
+			if (e !== n.length) {
+				var r = this.fast[n.charCodeAt(e)];
+				if (r) return this._token(r, n.charAt(e), e);
+				var i = this.re;
+				i.lastIndex = e;
+				var a = C(i, n), o = this.error;
+				if (a == null) return this._token(o, n.slice(e, n.length), e);
+				var r = this._getGroup(a), s = a[0];
+				return o.fallback && a.index !== e ? (this.queuedGroup = r, this.queuedText = s, this._token(o, n.slice(e, a.index), e)) : this._token(r, s, e);
+			}
+		}, S.prototype._token = function(e, t, n) {
+			var r = 0;
+			if (e.lineBreaks) {
+				var i = /\n/g, a = 1;
+				if (t === "\n") r = 1;
+				else for (; i.exec(t);) r++, a = i.lastIndex;
+			}
+			var o = {
+				type: typeof e.type == "function" && e.type(t) || e.defaultType,
+				value: typeof e.value == "function" ? e.value(t) : t,
+				text: t,
+				toString: w,
+				offset: n,
+				lineBreaks: r,
+				line: this.line,
+				col: this.col
+			}, s = t.length;
+			if (this.index += s, this.line += r, r === 0 ? this.col += s : this.col = s - a + 1, e.shouldThrow) throw Error(this.formatError(o, "invalid syntax"));
+			return e.pop ? this.popState() : e.push ? this.pushState(e.push) : e.next && this.setState(e.next), o;
+		}, typeof Symbol < "u" && Symbol.iterator) {
+			var T = function(e) {
+				this.lexer = e;
+			};
+			T.prototype.next = function() {
+				var e = this.lexer.next();
+				return {
+					value: e,
+					done: !e
+				};
+			}, T.prototype[Symbol.iterator] = function() {
+				return this;
+			}, S.prototype[Symbol.iterator] = function() {
+				return new T(this);
+			};
+		}
+		return S.prototype.formatError = function(e, t) {
+			if (e == null) var n = this.buffer.slice(this.index), e = {
+				text: n,
+				offset: this.index,
+				lineBreaks: n.indexOf("\n") === -1 ? 0 : 1,
+				line: this.line,
+				col: this.col
+			};
+			var r = 2, i = Math.max(e.line - r, 1), a = e.line + r, o = String(a).length, s = d(this.buffer, this.line - e.line + r + 1).slice(0, 5), c = [];
+			c.push(t + " at line " + e.line + " col " + e.col + ":"), c.push("");
+			for (var l = 0; l < s.length; l++) {
+				var f = s[l], p = i + l;
+				c.push(u(String(p), o) + "  " + f), p === e.line && c.push(u("", o + e.col + 1) + "^");
+			}
+			return c.join("\n");
+		}, S.prototype.clone = function() {
+			return new S(this.states, this.state);
+		}, S.prototype.has = function(e) {
+			return !0;
+		}, {
+			compile: v,
+			states: b,
+			error: Object.freeze({ error: !0 }),
+			fallback: Object.freeze({ fallback: !0 }),
+			keywords: x
+		};
+	});
+})), i = /* @__PURE__ */ n(((e) => {
+	var t = e && e.__importDefault || function(e) {
+		return e && e.__esModule ? e : { default: e };
+	};
+	Object.defineProperty(e, "__esModule", { value: !0 }), e.lexer = e.states = void 0;
+	var n = t(r());
+	e.states = {
+		body: {
+			doubleapos: {
+				match: "''",
+				value: () => "'"
+			},
+			quoted: {
+				lineBreaks: !0,
+				match: /'[{}#](?:[^']|'')*'(?!')/u,
+				value: (e) => e.slice(1, -1).replace(/''/g, "'")
+			},
+			argument: {
+				lineBreaks: !0,
+				match: /\{\s*[^\p{Pat_Syn}\p{Pat_WS}]+\s*/u,
+				push: "arg",
+				value: (e) => e.substring(1).trim()
+			},
+			octothorpe: "#",
+			end: {
+				match: "}",
+				pop: 1
+			},
+			content: {
+				lineBreaks: !0,
+				match: /[^][^{}#']*/u
+			}
+		},
+		arg: {
+			select: {
+				lineBreaks: !0,
+				match: /,\s*(?:plural|select|selectordinal)\s*,\s*/u,
+				next: "select",
+				value: (e) => e.split(",")[1].trim()
+			},
+			"func-args": {
+				lineBreaks: !0,
+				match: /,\s*[^\p{Pat_Syn}\p{Pat_WS}]+\s*,/u,
+				next: "body",
+				value: (e) => e.split(",")[1].trim()
+			},
+			"func-simple": {
+				lineBreaks: !0,
+				match: /,\s*[^\p{Pat_Syn}\p{Pat_WS}]+\s*/u,
+				value: (e) => e.substring(1).trim()
+			},
+			end: {
+				match: "}",
+				pop: 1
+			}
+		},
+		select: {
+			offset: {
+				lineBreaks: !0,
+				match: /\s*offset\s*:\s*\d+\s*/u,
+				value: (e) => e.split(":")[1].trim()
+			},
+			case: {
+				lineBreaks: !0,
+				match: /\s*(?:=\d+|[^\p{Pat_Syn}\p{Pat_WS}]+)\s*\{/u,
+				push: "body",
+				value: (e) => e.substring(0, e.indexOf("{")).trim()
+			},
+			end: {
+				match: /\s*\}/u,
+				pop: 1
+			}
+		}
+	}, e.lexer = n.default.states(e.states);
+})), a = (/* @__PURE__ */ n(((e) => {
+	Object.defineProperty(e, "__esModule", { value: !0 }), e.ParseError = void 0, e.parse = u;
+	var t = i(), n = (e) => ({
+		offset: e.offset,
+		line: e.line,
+		col: e.col,
+		text: e.text,
+		lineBreaks: e.lineBreaks
+	}), r = (e) => e === "plural" || e === "select" || e === "selectordinal";
+	function a(e, t) {
+		let n = "", r = "";
+		for (let i of t) {
+			let t = i.ctx.text;
+			switch (r += t, i.type) {
+				case "content":
+					n += i.value;
+					break;
+				case "argument":
+				case "function":
+				case "octothorpe":
+					n += t;
+					break;
+				default: throw new c(e, `Unsupported part in strict mode function arg style: ${t}`);
+			}
+		}
+		return [{
+			type: "content",
+			value: n.trim(),
+			ctx: Object.assign({}, t[0].ctx, { text: r })
+		}];
+	}
+	var o = [
+		"number",
+		"date",
+		"time",
+		"spellout",
+		"ordinal",
+		"duration"
+	], s = [
+		"zero",
+		"one",
+		"two",
+		"few",
+		"many",
+		"other"
+	], c = class extends Error {
+		constructor(e, n) {
+			super(t.lexer.formatError(e, n));
+		}
+	};
+	e.ParseError = c;
+	var l = class {
+		constructor(e, n) {
+			this.lexer = t.lexer.reset(e), this.cardinalKeys = n?.cardinal ?? s, this.ordinalKeys = n?.ordinal ?? s, this.strict = n?.strict ?? !1, this.strictPluralKeys = n?.strictPluralKeys ?? !0;
+		}
+		parse() {
+			return this.parseBody(!1, !0);
+		}
+		checkSelectKey(e, t, n) {
+			if (n[0] === "=") {
+				if (t === "select") throw new c(e, `The case ${n} is not valid with select`);
+			} else if (t !== "select") {
+				let r = t === "plural" ? this.cardinalKeys : this.ordinalKeys;
+				if (this.strictPluralKeys && r.length > 0 && !r.includes(n)) throw new c(e, `The ${t} case ${n} is not valid in this locale`);
+			}
+		}
+		parseSelect({ value: e }, t, r, i) {
+			let a = {
+				type: i,
+				arg: e,
+				cases: [],
+				ctx: r
+			};
+			i === "plural" || i === "selectordinal" ? t = !0 : this.strict && (t = !1);
+			for (let e of this.lexer) switch (e.type) {
+				case "offset":
+					if (i === "select") throw new c(e, "Unexpected plural offset for select");
+					if (a.cases.length > 0) throw new c(e, "Plural offset must be set before cases");
+					a.pluralOffset = Number(e.value), r.text += e.text, r.lineBreaks += e.lineBreaks;
+					break;
+				case "case":
+					this.checkSelectKey(e, i, e.value), a.cases.push({
+						key: e.value,
+						tokens: this.parseBody(t),
+						ctx: n(e)
+					});
+					break;
+				case "end": return a;
+				/* istanbul ignore next: never happens */
+				default: throw new c(e, `Unexpected lexer token: ${e.type}`);
+			}
+			throw new c(null, "Unexpected message end");
+		}
+		parseArgToken(e, t) {
+			let i = n(e), s = this.lexer.next();
+			if (!s) throw new c(null, "Unexpected message end");
+			if (i.text += s.text, i.lineBreaks += s.lineBreaks, this.strict && (s.type === "func-simple" || s.type === "func-args") && !o.includes(s.value)) throw new c(e, `Invalid strict mode function arg type: ${s.value}`);
+			switch (s.type) {
+				case "end": return {
+					type: "argument",
+					arg: e.value,
+					ctx: i
+				};
+				case "func-simple": {
+					let t = this.lexer.next();
+					if (!t) throw new c(null, "Unexpected message end");
+					/* istanbul ignore if: never happens */
+					if (t.type !== "end") throw new c(t, `Unexpected lexer token: ${t.type}`);
+					if (i.text += t.text, r(s.value.toLowerCase())) throw new c(s, `Invalid type identifier: ${s.value}`);
+					return {
+						type: "function",
+						arg: e.value,
+						key: s.value,
+						ctx: i
+					};
+				}
+				case "func-args": {
+					if (r(s.value.toLowerCase())) throw new c(s, `Invalid type identifier: ${s.value}`);
+					let n = this.parseBody(this.strict ? !1 : t);
+					return this.strict && n.length > 0 && (n = a(e, n)), {
+						type: "function",
+						arg: e.value,
+						key: s.value,
+						param: n,
+						ctx: i
+					};
+				}
+				case "select":
+					/* istanbul ignore else: never happens */
+					if (r(s.value)) return this.parseSelect(e, t, i, s.value);
+					throw new c(s, `Unexpected select type ${s.value}`);
+				/* istanbul ignore next: never happens */
+				default: throw new c(s, `Unexpected lexer token: ${s.type}`);
+			}
+		}
+		parseBody(e, t) {
+			let r = [], i = null;
+			for (let a of this.lexer) if (a.type === "argument") i &&= null, r.push(this.parseArgToken(a, e));
+			else if (a.type === "octothorpe" && e) i &&= null, r.push({
+				type: "octothorpe",
+				ctx: n(a)
+			});
+			else if (a.type === "end" && !t) return r;
+			else {
+				let t = a.value;
+				if (!e && a.type === "quoted" && t[0] === "#") {
+					if (t.includes("{")) throw new c(a, `Unsupported escape pattern: ${t}`);
+					t = a.text;
+				}
+				i ? (i.value += t, i.ctx.text += a.text, i.ctx.lineBreaks += a.lineBreaks) : (i = {
+					type: "content",
+					value: t,
+					ctx: n(a)
+				}, r.push(i));
+			}
+			if (t) return r;
+			throw new c(null, "Unexpected message end");
+		}
+	};
+	function u(e, t = {}) {
+		return new l(e, t).parse();
+	}
+})))(), o = class extends Error {
+	constructor(e, t, n) {
+		super(e), this.token = t, this.type = n || "error";
+	}
+}, s = (e) => e < 4 ? "short" : e === 4 ? "long" : "narrow", c = (e) => e % 2 == 0 ? "2-digit" : "numeric";
+function l(e, t) {
+	switch (e.char) {
+		case "y": return { year: c(e.width) };
+		case "r": return {
+			calendar: "gregory",
+			year: "numeric"
+		};
+		default: return t(`${e.desc} is not supported; falling back to year:numeric`, o.WARNING), { year: "numeric" };
+	}
+}
+function u(e, t) {
+	switch (e.width) {
+		case 1: return "numeric";
+		case 2: return "2-digit";
+		case 3: return "short";
+		case 4: return "long";
+		case 5: return "narrow";
+		default:
+			t(`${e.desc} is not supported with width ${e.width}`);
+			return;
+	}
+}
+function d(e, t) {
+	let { char: n, desc: r, width: i } = e;
+	if (n === "d") return c(i);
+	t(`${r} is not supported`);
+}
+function f(e, t) {
+	let { char: n, desc: r, width: i } = e;
+	return (n === "c" || n === "e") && i < 3 && t(`Numeric value is not supported for ${r}; falling back to weekday:short`, o.WARNING), s(i);
+}
+function p(e) {
+	let t = c(e.width), n;
+	switch (e.char) {
+		case "h":
+			n = "h12";
+			break;
+		case "H":
+			n = "h23";
+			break;
+		case "k":
+			n = "h24";
+			break;
+		case "K":
+			n = "h11";
+			break;
+	}
+	return n ? {
+		hour: t,
+		hourCycle: n
+	} : { hour: t };
+}
+function m(e, t) {
+	let { char: n, desc: r, width: i } = e;
+	switch (n) {
+		case "v":
+		case "z": return i === 4 ? "long" : "short";
+		case "V":
+			if (i === 4) return "long";
+			t(`${r} is not supported with width ${i}`);
+			return;
+		case "X":
+			t(`${r} is not supported`);
+			return;
+	}
+	return "short";
+}
+function h(e, t) {
+	switch (e.field) {
+		case "era": return { era: s(e.width) };
+		case "year": return l(e, t);
+		case "month": return { month: u(e, t) };
+		case "day": return { day: d(e, t) };
+		case "weekday": return { weekday: f(e, t) };
+		case "period": return;
+		case "hour": return p(e);
+		case "min": return { minute: c(e.width) };
+		case "sec": return { second: c(e.width) };
+		case "tz": return { timeZoneName: m(e, t) };
+		case "quarter":
+		case "week":
+		case "sec-frac":
+		case "ms": t(`${e.desc} is not supported`);
+	}
+}
+function g(e, t, n = (e) => {
+	throw e;
+}) {
+	let r = { timeZone: t }, i = [];
+	for (let t of e) {
+		let { error: e, field: a, str: s } = t;
+		if (e) {
+			let r = new o(e.message, t);
+			r.stack = e.stack, n(r);
+		}
+		s && n(new o(`Ignoring string part: ${s}`, t, o.WARNING)), a && (i.indexOf(a) === -1 ? i.push(a) : n(new o(`Duplicate ${a} token`, t)));
+		let c = h(t, (e, r) => n(new o(e, t, r)));
+		c && Object.assign(r, c);
+	}
+	return r;
+}
+var _ = {
+	G: {
+		field: "era",
+		desc: "Era"
+	},
+	y: {
+		field: "year",
+		desc: "Year"
+	},
+	Y: {
+		field: "year",
+		desc: "Year of \"Week of Year\""
+	},
+	u: {
+		field: "year",
+		desc: "Extended year"
+	},
+	U: {
+		field: "year",
+		desc: "Cyclic year name"
+	},
+	r: {
+		field: "year",
+		desc: "Related Gregorian year"
+	},
+	Q: {
+		field: "quarter",
+		desc: "Quarter"
+	},
+	q: {
+		field: "quarter",
+		desc: "Stand-alone quarter"
+	},
+	M: {
+		field: "month",
+		desc: "Month in year"
+	},
+	L: {
+		field: "month",
+		desc: "Stand-alone month in year"
+	},
+	w: {
+		field: "week",
+		desc: "Week of year"
+	},
+	W: {
+		field: "week",
+		desc: "Week of month"
+	},
+	d: {
+		field: "day",
+		desc: "Day in month"
+	},
+	D: {
+		field: "day",
+		desc: "Day of year"
+	},
+	F: {
+		field: "day",
+		desc: "Day of week in month"
+	},
+	g: {
+		field: "day",
+		desc: "Modified julian day"
+	},
+	E: {
+		field: "weekday",
+		desc: "Day of week"
+	},
+	e: {
+		field: "weekday",
+		desc: "Local day of week"
+	},
+	c: {
+		field: "weekday",
+		desc: "Stand-alone local day of week"
+	},
+	a: {
+		field: "period",
+		desc: "AM/PM marker"
+	},
+	b: {
+		field: "period",
+		desc: "AM/PM/noon/midnight marker"
+	},
+	B: {
+		field: "period",
+		desc: "Flexible day period"
+	},
+	h: {
+		field: "hour",
+		desc: "Hour in AM/PM (1~12)"
+	},
+	H: {
+		field: "hour",
+		desc: "Hour in day (0~23)"
+	},
+	k: {
+		field: "hour",
+		desc: "Hour in day (1~24)"
+	},
+	K: {
+		field: "hour",
+		desc: "Hour in AM/PM (0~11)"
+	},
+	j: {
+		field: "hour",
+		desc: "Hour in preferred cycle"
+	},
+	J: {
+		field: "hour",
+		desc: "Hour in preferred cycle without marker"
+	},
+	C: {
+		field: "hour",
+		desc: "Hour in preferred cycle with flexible marker"
+	},
+	m: {
+		field: "min",
+		desc: "Minute in hour"
+	},
+	s: {
+		field: "sec",
+		desc: "Second in minute"
+	},
+	S: {
+		field: "sec-frac",
+		desc: "Fractional second"
+	},
+	A: {
+		field: "ms",
+		desc: "Milliseconds in day"
+	},
+	z: {
+		field: "tz",
+		desc: "Time Zone: specific non-location"
+	},
+	Z: {
+		field: "tz",
+		desc: "Time Zone"
+	},
+	O: {
+		field: "tz",
+		desc: "Time Zone: localized"
+	},
+	v: {
+		field: "tz",
+		desc: "Time Zone: generic non-location"
+	},
+	V: {
+		field: "tz",
+		desc: "Time Zone: ID"
+	},
+	X: {
+		field: "tz",
+		desc: "Time Zone: ISO8601 with Z"
+	},
+	x: {
+		field: "tz",
+		desc: "Time Zone: ISO8601"
+	}
+}, v = (e) => e >= "A" && e <= "Z" || e >= "a" && e <= "z";
+function y(e, t) {
+	let n = e[t], r = 1;
+	for (; e[++t] === n;) ++r;
+	let i = _[n];
+	if (!i) {
+		let e = `The letter ${n} is not a valid field identifier`;
+		return {
+			char: n,
+			error: Error(e),
+			width: r
+		};
+	}
+	return {
+		char: n,
+		field: i.field,
+		desc: i.desc,
+		width: r
+	};
+}
+function b(e, t) {
+	let n = e[++t], r = 2;
+	if (n === "'") return {
+		char: "'",
+		str: n,
+		width: r
+	};
+	for (;;) {
+		let i = e[++t];
+		if (++r, i === void 0) {
+			let t = `Unterminated quoted literal in pattern: ${n || e}`;
+			return {
+				char: "'",
+				error: Error(t),
+				str: n,
+				width: r
+			};
+		} else if (i === "'") {
+			if (e[++t] !== "'") return {
+				char: "'",
+				str: n,
+				width: r
+			};
+			++r;
+		}
+		n += i;
+	}
+}
+function x(e, t) {
+	let n = e[t];
+	if (!n) return null;
+	if (v(n)) return y(e, t);
+	if (n === "'") return b(e, t);
+	let r = n, i = 1;
+	for (;;) {
+		let a = e[++t];
+		if (!a || v(a) || a === "'") return {
+			char: n,
+			str: r,
+			width: i
+		};
+		r += a, i += 1;
+	}
+}
+function S(e) {
+	let t = [], n = 0;
+	for (;;) {
+		let r = x(e, n);
+		if (!r) return t;
+		t.push(r), n += r.width;
+	}
+}
+function C(e, t) {
+	return e.filter((e) => e.type !== "content").length ? e.map((e) => {
+		if (e.type === "content") return t(e.value);
+		if (e.type === "octothorpe") return "#";
+		if (e.type === "argument") return [e.arg];
+		if (e.type === "function") {
+			let t = e?.param?.[0];
+			if (e.key === "date" && t) {
+				let n = w(t.value.trim(), (e) => {
+					throw Error(`Unable to compile date expression: ${e.message}`);
+				});
+				return [
+					e.arg,
+					e.key,
+					n
+				];
+			}
+			return t ? [
+				e.arg,
+				e.key,
+				t.value.trim()
+			] : [e.arg, e.key];
+		}
+		let n = e.pluralOffset, r = {};
+		return e.cases.forEach(({ key: e, tokens: n }) => {
+			let i = e[0] === "=" ? e.slice(1) : e;
+			r[i] = C(n, t);
+		}), [
+			e.arg,
+			e.type,
+			{
+				offset: n,
+				...r
+			}
+		];
+	}) : e.map((e) => t(e.value));
+}
+function w(e, t) {
+	return /^::/.test(e) ? g(S(e.substring(2)), void 0, t) : e;
+}
+function T(e, t = (e) => e) {
+	return C((0, a.parse)(e), t);
+}
+function ee(e, t = (e) => e) {
+	try {
+		return T(e, t);
+	} catch (t) {
+		return console.error(`${t.message} 
+
+Message: ${e}`), [e];
+	}
+}
+//#endregion
+//#region ../../node_modules/@lingui/core/dist/index.mjs
+var E = (e) => typeof e == "string", te = (e) => typeof e == "function", D = /* @__PURE__ */ new Map(), O = "en";
+function k(e) {
+	return [...Array.isArray(e) ? e : [e], O];
+}
+function A(e, t, n) {
+	let r = k(e);
+	n ||= "default";
+	let i;
+	if (typeof n == "string") switch (i = {
+		day: "numeric",
+		month: "short",
+		year: "numeric"
+	}, n) {
+		case "full": i.weekday = "long";
+		case "long":
+			i.month = "long";
+			break;
+		case "short":
+			i.month = "numeric";
+			break;
+	}
+	else i = n;
+	return N(() => P("date", r, n), () => new Intl.DateTimeFormat(r, i)).format(E(t) ? new Date(t) : t);
+}
+function ne(e, t, n) {
+	let r;
+	if (n ||= "default", typeof n == "string") switch (r = {
+		second: "numeric",
+		minute: "numeric",
+		hour: "numeric"
+	}, n) {
+		case "full":
+		case "long":
+			r.timeZoneName = "short";
+			break;
+		case "short": delete r.second;
+	}
+	else r = n;
+	return A(e, t, r);
+}
+function j(e, t, n) {
+	let r = k(e);
+	return N(() => P("number", r, n), () => new Intl.NumberFormat(r, n)).format(t);
+}
+function M(e, t, n, { offset: r = 0, ...i }) {
+	let a = k(e), o = t ? N(() => P("plural-ordinal", a), () => new Intl.PluralRules(a, { type: "ordinal" })) : N(() => P("plural-cardinal", a), () => new Intl.PluralRules(a, { type: "cardinal" }));
+	return i[n] ?? i[o.select(n - r)] ?? i.other;
+}
+function N(e, t) {
+	let n = e(), r = D.get(n);
+	return r || (r = t(), D.set(n, r)), r;
+}
+function P(e, t, n) {
+	return `${e}-${t.join("-")}-${JSON.stringify(n)}`;
+}
+var F = /\\u[a-fA-F0-9]{4}|\\x[a-fA-F0-9]{2}/, I = (e) => e.replace(/\\u([a-fA-F0-9]{4})|\\x([a-fA-F0-9]{2})/g, (e, t, n) => {
+	if (t) {
+		let e = parseInt(t, 16);
+		return String.fromCharCode(e);
+	} else {
+		let e = parseInt(n, 16);
+		return String.fromCharCode(e);
+	}
+}), L = "%__lingui_octothorpe__%", re = (e, t, n = {}) => {
+	let r = t || e, i = (e) => typeof e == "object" ? e : n[e], a = (e, t) => {
+		let a = j(r, e, Object.keys(n).length ? i("number") : void 0);
+		return t.replace(new RegExp(L, "g"), a);
+	};
+	return {
+		plural: (e, t) => {
+			let { offset: n = 0 } = t, i = M(r, !1, e, t);
+			return a(e - n, i);
+		},
+		selectordinal: (e, t) => {
+			let { offset: n = 0 } = t, i = M(r, !0, e, t);
+			return a(e - n, i);
+		},
+		select: ie,
+		number: (e, t) => j(r, e, i(t) || { style: t }),
+		date: (e, t) => A(r, e, i(t) || t),
+		time: (e, t) => ne(r, e, i(t) || t)
+	};
+}, ie = (e, t) => t[e] ?? t.other;
+function ae(e, t, n) {
+	return (r = {}, i) => {
+		let a = re(t, n, i), o = (e, t = !1) => Array.isArray(e) ? e.reduce((e, n) => {
+			if (n === "#" && t) return e + L;
+			if (E(n)) return e + n;
+			let [i, s, c] = n, l = {};
+			s === "plural" || s === "selectordinal" || s === "select" ? Object.entries(c).forEach(([e, t]) => {
+				l[e] = o(t, s === "plural" || s === "selectordinal");
+			}) : l = c;
+			let u;
+			if (s) {
+				let e = a[s];
+				u = e(r[i], l);
+			} else u = r[i];
+			return u == null ? e : e + u;
+		}, "") : e, s = o(e);
+		return E(s) && F.test(s) ? I(s) : E(s) ? s : s ? String(s) : "";
+	};
+}
+var oe = Object.defineProperty, se = (e, t, n) => t in e ? oe(e, t, {
+	enumerable: !0,
+	configurable: !0,
+	writable: !0,
+	value: n
+}) : e[t] = n, ce = (e, t, n) => (se(e, typeof t == "symbol" ? t : t + "", n), n), le = class {
+	constructor() {
+		ce(this, "_events", {});
+	}
+	on(e, t) {
+		var n;
+		return (n = this._events)[e] ?? (n[e] = []), this._events[e].push(t), () => this.removeListener(e, t);
+	}
+	removeListener(e, t) {
+		let n = this._getListeners(e);
+		if (!n) return;
+		let r = n.indexOf(t);
+		~r && n.splice(r, 1);
+	}
+	emit(e, ...t) {
+		let n = this._getListeners(e);
+		n && n.map((e) => e.apply(this, t));
+	}
+	_getListeners(e) {
+		let t = this._events[e];
+		return Array.isArray(t) ? t : !1;
+	}
+}, ue = Object.defineProperty, de = (e, t, n) => t in e ? ue(e, t, {
+	enumerable: !0,
+	configurable: !0,
+	writable: !0,
+	value: n
+}) : e[t] = n, R = (e, t, n) => (de(e, typeof t == "symbol" ? t : t + "", n), n), fe = class extends le {
+	constructor(e) {
+		super(), R(this, "_locale", ""), R(this, "_locales"), R(this, "_localeData", {}), R(this, "_messages", {}), R(this, "_missing"), R(this, "_messageCompiler"), R(this, "t", this._.bind(this)), process.env.NODE_ENV !== "production" && this.setMessagesCompiler(ee), e.missing != null && (this._missing = e.missing), e.messages != null && this.load(e.messages), e.localeData != null && this.loadLocaleData(e.localeData), (typeof e.locale == "string" || e.locales) && this.activate(e.locale ?? O, e.locales);
+	}
+	get locale() {
+		return this._locale;
+	}
+	get locales() {
+		return this._locales;
+	}
+	get messages() {
+		return this._messages[this._locale] ?? {};
+	}
+	get localeData() {
+		return this._localeData[this._locale] ?? {};
+	}
+	_loadLocaleData(e, t) {
+		let n = this._localeData[e];
+		n ? Object.assign(n, t) : this._localeData[e] = t;
+	}
+	setMessagesCompiler(e) {
+		return this._messageCompiler = e, this;
+	}
+	loadLocaleData(e, t) {
+		typeof e == "string" ? this._loadLocaleData(e, t) : Object.keys(e).forEach((t) => this._loadLocaleData(t, e[t])), this.emit("change");
+	}
+	_load(e, t) {
+		let n = this._messages[e];
+		n ? Object.assign(n, t) : this._messages[e] = t;
+	}
+	load(e, t) {
+		typeof e == "string" && typeof t == "object" ? this._load(e, t) : Object.entries(e).forEach(([e, t]) => this._load(e, t)), this.emit("change");
+	}
+	loadAndActivate({ locale: e, locales: t, messages: n }) {
+		this._locale = e, this._locales = t || void 0, this._messages[this._locale] = n, this.emit("change");
+	}
+	activate(e, t) {
+		process.env.NODE_ENV !== "production" && (this._messages[e] || console.warn(`Messages for locale "${e}" not loaded.`)), this._locale = e, this._locales = t, this.emit("change");
+	}
+	_(e, t, n) {
+		if (!this.locale) throw Error("Lingui: Attempted to call a translation function without setting a locale.\nMake sure to call `i18n.activate(locale)` before using Lingui functions.\nThis issue may also occur due to a race condition in your initialization logic.");
+		let r = n?.message;
+		e ||= "", E(e) || (t = e.values || t, r = e.message, e = e.id);
+		let i = this.messages[e], a = i === void 0, o = this._missing;
+		if (o && a) return te(o) ? o(this._locale, e) : o;
+		a && this.emit("missing", {
+			id: e,
+			locale: this._locale
+		});
+		let s = i || r || e;
+		return E(s) && (this._messageCompiler ? s = this._messageCompiler(s) : console.warn(`Uncompiled message detected! Message:
+
+> ${s}
+
+That means you use raw catalog or your catalog doesn't have a translation for the message and fallback was used.
+ICU features such as interpolation and plurals will not work properly for that message. 
+
+Please compile your catalog first. 
+`)), E(s) && F.test(s) ? I(s) : E(s) ? s : ae(s, this._locale, this._locales)(t, n?.formats);
+	}
+	date(e, t) {
+		return A(this._locales || this._locale, e, t);
+	}
+	number(e, t) {
+		return j(this._locales || this._locale, e, t);
+	}
+};
+function z(e = {}) {
+	return new fe(e);
+}
+z();
+//#endregion
+//#region src/i18n/create-i18n-instance-factory.ts
+var pe = (e) => {
+	let t = {};
+	return (n) => {
+		let r = t[n];
+		if (r !== void 0) return r;
+		let i = e.en ?? {}, a = e[n] ?? i, o = z();
+		return o.load(n, a), o.activate(n), t[n] = o, o;
+	};
+};
+//#endregion
+//#region ../../node_modules/@noble/hashes/esm/utils.js
+function me(e) {
+	return e instanceof Uint8Array || ArrayBuffer.isView(e) && e.constructor.name === "Uint8Array";
+}
+function B(e, ...t) {
+	if (!me(e)) throw Error("Uint8Array expected");
+	if (t.length > 0 && !t.includes(e.length)) throw Error("Uint8Array expected of length " + t + ", got length=" + e.length);
+}
+function V(e, t = !0) {
+	if (e.destroyed) throw Error("Hash instance has been destroyed");
+	if (t && e.finished) throw Error("Hash#digest() has already been called");
+}
+function he(e, t) {
+	B(e);
+	let n = t.outputLen;
+	if (e.length < n) throw Error("digestInto() expects output buffer of length at least " + n);
+}
+function H(...e) {
+	for (let t = 0; t < e.length; t++) e[t].fill(0);
+}
+function U(e) {
+	return new DataView(e.buffer, e.byteOffset, e.byteLength);
+}
+function W(e, t) {
+	return e << 32 - t | e >>> t;
+}
+function G(e) {
+	if (typeof e != "string") throw Error("string expected");
+	return new Uint8Array(new TextEncoder().encode(e));
+}
+function K(e) {
+	return typeof e == "string" && (e = G(e)), B(e), e;
+}
+var ge = class {};
+function _e(e) {
+	let t = (t) => e().update(K(t)).digest(), n = e();
+	return t.outputLen = n.outputLen, t.blockLen = n.blockLen, t.create = () => e(), t;
+}
+//#endregion
+//#region ../../node_modules/@noble/hashes/esm/_md.js
+function ve(e, t, n, r) {
+	if (typeof e.setBigUint64 == "function") return e.setBigUint64(t, n, r);
+	let i = BigInt(32), a = BigInt(4294967295), o = Number(n >> i & a), s = Number(n & a), c = r ? 4 : 0, l = r ? 0 : 4;
+	e.setUint32(t + c, o, r), e.setUint32(t + l, s, r);
+}
+function ye(e, t, n) {
+	return e & t ^ ~e & n;
+}
+function be(e, t, n) {
+	return e & t ^ e & n ^ t & n;
+}
+var xe = class extends ge {
+	constructor(e, t, n, r) {
+		super(), this.finished = !1, this.length = 0, this.pos = 0, this.destroyed = !1, this.blockLen = e, this.outputLen = t, this.padOffset = n, this.isLE = r, this.buffer = new Uint8Array(e), this.view = U(this.buffer);
+	}
+	update(e) {
+		V(this), e = K(e), B(e);
+		let { view: t, buffer: n, blockLen: r } = this, i = e.length;
+		for (let a = 0; a < i;) {
+			let o = Math.min(r - this.pos, i - a);
+			if (o === r) {
+				let t = U(e);
+				for (; r <= i - a; a += r) this.process(t, a);
+				continue;
+			}
+			n.set(e.subarray(a, a + o), this.pos), this.pos += o, a += o, this.pos === r && (this.process(t, 0), this.pos = 0);
+		}
+		return this.length += e.length, this.roundClean(), this;
+	}
+	digestInto(e) {
+		V(this), he(e, this), this.finished = !0;
+		let { buffer: t, view: n, blockLen: r, isLE: i } = this, { pos: a } = this;
+		t[a++] = 128, H(this.buffer.subarray(a)), this.padOffset > r - a && (this.process(n, 0), a = 0);
+		for (let e = a; e < r; e++) t[e] = 0;
+		ve(n, r - 8, BigInt(this.length * 8), i), this.process(n, 0);
+		let o = U(e), s = this.outputLen;
+		if (s % 4) throw Error("_sha2: outputLen should be aligned to 32bit");
+		let c = s / 4, l = this.get();
+		if (c > l.length) throw Error("_sha2: outputLen bigger than state");
+		for (let e = 0; e < c; e++) o.setUint32(4 * e, l[e], i);
+	}
+	digest() {
+		let { buffer: e, outputLen: t } = this;
+		this.digestInto(e);
+		let n = e.slice(0, t);
+		return this.destroy(), n;
+	}
+	_cloneInto(e) {
+		e ||= new this.constructor(), e.set(...this.get());
+		let { blockLen: t, buffer: n, length: r, finished: i, destroyed: a, pos: o } = this;
+		return e.destroyed = a, e.finished = i, e.length = r, e.pos = o, r % t && e.buffer.set(n), e;
+	}
+	clone() {
+		return this._cloneInto();
+	}
+}, q = /* @__PURE__ */ Uint32Array.from([
+	1779033703,
+	3144134277,
+	1013904242,
+	2773480762,
+	1359893119,
+	2600822924,
+	528734635,
+	1541459225
+]), Se = /* @__PURE__ */ Uint32Array.from([
+	1116352408,
+	1899447441,
+	3049323471,
+	3921009573,
+	961987163,
+	1508970993,
+	2453635748,
+	2870763221,
+	3624381080,
+	310598401,
+	607225278,
+	1426881987,
+	1925078388,
+	2162078206,
+	2614888103,
+	3248222580,
+	3835390401,
+	4022224774,
+	264347078,
+	604807628,
+	770255983,
+	1249150122,
+	1555081692,
+	1996064986,
+	2554220882,
+	2821834349,
+	2952996808,
+	3210313671,
+	3336571891,
+	3584528711,
+	113926993,
+	338241895,
+	666307205,
+	773529912,
+	1294757372,
+	1396182291,
+	1695183700,
+	1986661051,
+	2177026350,
+	2456956037,
+	2730485921,
+	2820302411,
+	3259730800,
+	3345764771,
+	3516065817,
+	3600352804,
+	4094571909,
+	275423344,
+	430227734,
+	506948616,
+	659060556,
+	883997877,
+	958139571,
+	1322822218,
+	1537002063,
+	1747873779,
+	1955562222,
+	2024104815,
+	2227730452,
+	2361852424,
+	2428436474,
+	2756734187,
+	3204031479,
+	3329325298
+]), J = /* @__PURE__ */ new Uint32Array(64), Ce = class extends xe {
+	constructor(e = 32) {
+		super(64, e, 8, !1), this.A = q[0] | 0, this.B = q[1] | 0, this.C = q[2] | 0, this.D = q[3] | 0, this.E = q[4] | 0, this.F = q[5] | 0, this.G = q[6] | 0, this.H = q[7] | 0;
+	}
+	get() {
+		let { A: e, B: t, C: n, D: r, E: i, F: a, G: o, H: s } = this;
+		return [
+			e,
+			t,
+			n,
+			r,
+			i,
+			a,
+			o,
+			s
+		];
+	}
+	set(e, t, n, r, i, a, o, s) {
+		this.A = e | 0, this.B = t | 0, this.C = n | 0, this.D = r | 0, this.E = i | 0, this.F = a | 0, this.G = o | 0, this.H = s | 0;
+	}
+	process(e, t) {
+		for (let n = 0; n < 16; n++, t += 4) J[n] = e.getUint32(t, !1);
+		for (let e = 16; e < 64; e++) {
+			let t = J[e - 15], n = J[e - 2], r = W(t, 7) ^ W(t, 18) ^ t >>> 3;
+			J[e] = (W(n, 17) ^ W(n, 19) ^ n >>> 10) + J[e - 7] + r + J[e - 16] | 0;
+		}
+		let { A: n, B: r, C: i, D: a, E: o, F: s, G: c, H: l } = this;
+		for (let e = 0; e < 64; e++) {
+			let t = W(o, 6) ^ W(o, 11) ^ W(o, 25), u = l + t + ye(o, s, c) + Se[e] + J[e] | 0, d = (W(n, 2) ^ W(n, 13) ^ W(n, 22)) + be(n, r, i) | 0;
+			l = c, c = s, s = o, o = a + u | 0, a = i, i = r, r = n, n = u + d | 0;
+		}
+		n = n + this.A | 0, r = r + this.B | 0, i = i + this.C | 0, a = a + this.D | 0, o = o + this.E | 0, s = s + this.F | 0, c = c + this.G | 0, l = l + this.H | 0, this.set(n, r, i, a, o, s, c, l);
+	}
+	roundClean() {
+		H(J);
+	}
+	destroy() {
+		this.set(0, 0, 0, 0, 0, 0, 0, 0), H(this.buffer);
+	}
+}, we = /* @__PURE__ */ _e(() => new Ce()), Te = "", Ee = 5e4, Y = /* @__PURE__ */ new Map(), De = (e) => typeof Buffer < "u" ? Buffer.from(e).toString("base64") : btoa(String.fromCharCode(...e)), Oe = (t, n = "") => {
+	let r = t + Te + (n || ""), i = Y.get(r);
+	if (e(i)) return i;
+	let a = De(we(G(r))).slice(0, 6);
+	return Y.size >= Ee && Y.clear(), Y.set(r, a), a;
+}, ke = (e, t) => `${e}.${t}`, Ae = /\{(\w+)\}/g, je = (t, n) => e(n) ? t.replace(Ae, (t, r) => {
+	let i = n[r];
+	return e(i) ? String(i) : t;
+}) : t, X = [
+	"objectLabel",
+	"objectLabelSingular",
+	"objectLabelPlural",
+	"objectIcon"
+], Z = [
+	"objectLabelSingular",
+	"objectLabelPlural",
+	"objectIcon"
+], Q = (e) => `{${e}}`, Me = Object.fromEntries(X.map((e) => [e, Q(e)])), $ = (n) => e(n) ? t(n) : void 0, Ne = ({ label: e, labelSingular: t, labelPlural: n, icon: r }) => ({
+	objectLabel: $(e),
+	objectLabelSingular: $(t),
+	objectLabelPlural: $(n),
+	objectIcon: r ?? void 0
+}), Pe = (e) => Z.some((t) => e.includes(Q(t))), Fe = {
+	objectMetadata: [
+		"labelSingular",
+		"labelPlural",
+		"description"
+	],
+	fieldMetadata: ["label", "description"],
+	view: ["name"],
+	viewFieldGroup: ["name"],
+	pageLayout: ["name"],
+	pageLayoutTab: ["title"],
+	pageLayoutWidget: ["title"],
+	commandMenuItem: ["label", "shortLabel"],
+	navigationMenuItem: ["name"],
+	timelineActivityType: ["label"]
+};
+//#endregion
+export { X as METADATA_LABEL_PLACEHOLDER_NAMES, Me as METADATA_LABEL_PLACEHOLDER_PASS_THROUGH, Z as OBJECT_METADATA_LABEL_PLACEHOLDER_NAMES, Fe as TRANSLATABLE_PROPERTIES_BY_METADATA_NAME, Ne as buildObjectMetadataLabelPlaceholderValues, pe as createI18nInstanceFactory, Oe as generateMessageId, ke as getMetadataLabelContext, Q as getMetadataLabelPlaceholder, Pe as hasObjectMetadataLabelPlaceholder, je as interpolateMessagePlaceholders };

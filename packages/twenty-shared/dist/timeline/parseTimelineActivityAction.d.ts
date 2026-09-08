@@ -1,0 +1,2 @@
+export declare const parseTimelineActivityAction: (name: string | null | undefined) => "created" | "deleted" | "linked" | "restored" | "unlinked" | "updated";
+//# sourceMappingURL=parseTimelineActivityAction.d.ts.map

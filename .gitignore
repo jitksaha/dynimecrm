@@ -34,7 +34,6 @@ packages/twenty-front/dist
 packages/twenty-front-component-renderer/dist
 packages/twenty-sdk/dist
 packages/twenty-ui/dist
-packages/twenty-client-sdk/dist
 storybook-static
 *.tsbuildinfo
 .oxlintcache

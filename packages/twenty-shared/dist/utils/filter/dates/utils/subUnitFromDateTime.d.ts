@@ -1,0 +1,2 @@
+export declare const subUnitFromDateTime: (dateTime: Date, amount: number, unit: "DAY" | "HOUR" | "MINUTE" | "MONTH" | "QUARTER" | "SECOND" | "WEEK" | "YEAR") => Date;
+//# sourceMappingURL=subUnitFromDateTime.d.ts.map

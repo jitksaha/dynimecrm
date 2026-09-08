@@ -1,0 +1,18 @@
+import { z } from 'zod';
+export declare const workflowLogicFunctionActionSettingsSchema: z.ZodObject<{
+    outputSchema: z.ZodObject<{}, z.core.$loose>;
+    errorHandlingOptions: z.ZodObject<{
+        retryOnFailure: z.ZodObject<{
+            value: z.ZodBoolean;
+        }, z.core.$strip>;
+        continueOnFailure: z.ZodObject<{
+            value: z.ZodBoolean;
+        }, z.core.$strip>;
+    }, z.core.$strip>;
+    expectedOutputSchema: z.ZodOptional<z.ZodObject<{}, z.core.$loose>>;
+    input: z.ZodObject<{
+        logicFunctionId: z.ZodString;
+        logicFunctionInput: z.ZodRecord<z.ZodString, z.ZodAny>;
+    }, z.core.$strip>;
+}, z.core.$strip>;
+//# sourceMappingURL=logic-function-action-settings-schema.d.ts.map

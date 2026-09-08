@@ -1,0 +1,1 @@
+let e=require("@sniptt/guards");var t=t=>(t?.type===`record`||t?.type===`object`)&&(0,e.isNonEmptyString)(t.objectUniversalIdentifier);Object.defineProperty(exports,"t",{enumerable:!0,get:function(){return t}});

@@ -1,0 +1,3 @@
+import { type TranslatablePropertyName } from './translatable-properties-by-metadata-name';
+export declare const getMetadataLabelContext: <T extends "commandMenuItem" | "fieldMetadata" | "navigationMenuItem" | "objectMetadata" | "pageLayout" | "pageLayoutTab" | "pageLayoutWidget" | "timelineActivityType" | "view" | "viewFieldGroup">(metadataName: T, property: TranslatablePropertyName<T>) => string;
+//# sourceMappingURL=get-metadata-label-context.d.ts.map

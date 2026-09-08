@@ -1,0 +1,2 @@
+export declare const isSubDayRelativeDateFilterUnit: (unit: "DAY" | "HOUR" | "MINUTE" | "MONTH" | "QUARTER" | "SECOND" | "WEEK" | "YEAR") => boolean;
+//# sourceMappingURL=isSubDayRelativeDateFilterUnit.d.ts.map

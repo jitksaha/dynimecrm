@@ -1,0 +1,1 @@
+var e=({objectNameSingular:e,recordId:t,displayName:n})=>`[[record:${e}:${t}:${n}]]`;Object.defineProperty(exports,"t",{enumerable:!0,get:function(){return e}});

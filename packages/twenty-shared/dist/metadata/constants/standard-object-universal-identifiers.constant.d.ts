@@ -1,0 +1,34 @@
+export declare const STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS: {
+    readonly timelineActivity: "20202020-6736-4337-b5c4-8b39fae325a5";
+    readonly attachment: "20202020-bd3d-4c60-8dca-571c71d4447a";
+    readonly blocklist: "20202020-0408-4f38-b8a8-4d5e3e26e24d";
+    readonly calendarChannelEventAssociation: "20202020-491b-4aaa-9825-afd1bae6ae00";
+    readonly calendarEvent: "20202020-8f1d-4eef-9f85-0d1965e27221";
+    readonly calendarEventTarget: "6a9b9656-3e23-4234-94a4-b913c5dde668";
+    readonly calendarEventParticipant: "20202020-a1c3-47a6-9732-27e5b1e8436d";
+    readonly callRecording: "ce19efb9-710f-45b2-b141-473abbeea60b";
+    readonly noteTarget: "20202020-fff0-4b44-be82-bda313884400";
+    readonly taskTarget: "20202020-5a9a-44e8-95df-771cd06d0fb1";
+    readonly person: "20202020-e674-48e5-a542-72570eee7213";
+    readonly company: "20202020-b374-4779-a561-80086cb2e17f";
+    readonly opportunity: "20202020-9549-49dd-b2b2-883999db8938";
+    readonly note: "20202020-0b00-45cd-b6f6-6cd806fc6804";
+    readonly task: "20202020-1ba1-48ba-bc83-ef7e5990ed10";
+    readonly workflow: "20202020-62be-406c-b9ca-8caa50d51392";
+    readonly workflowAutomatedTrigger: "20202020-3319-4234-a34c-7f3b9d2e4d1f";
+    readonly workflowVersion: "20202020-d65d-4ab9-9344-d77bfb376a3d";
+    readonly workflowRun: "20202020-4e28-4e95-a9d7-6c00874f843c";
+    readonly workspaceMember: "20202020-3319-4234-a34c-82d5c0e881a6";
+    readonly dashboard: "20202020-3840-4b6d-9425-0c5188b05ca8";
+    readonly message: "20202020-3f6b-4425-80ab-e468899ab4b2";
+    readonly messageChannelMessageAssociation: "20202020-ad1e-4127-bccb-d83ae04d2ccb";
+    readonly messageChannelMessageAssociationMessageFolder: "20202020-a1b0-40b0-8ab0-5b6c7d8e9f0a";
+    readonly messageList: "826561ea-4816-411c-baa0-eec5e6ca8866";
+    readonly messageListMember: "27773d24-8ce3-40f8-aa6c-1f590f2c08d2";
+    readonly messageCampaign: "238acb94-dd4c-4036-bc55-19b99d821efd";
+    readonly messageParticipant: "20202020-a433-4456-aa2d-fd9cb26b774a";
+    readonly messageThread: "20202020-849a-4c3e-84f5-a25a7d802271";
+    readonly messageThreadTarget: "378ad1b0-592d-4084-80ee-86fef44725b9";
+};
+export type StandardObjectWithUniversalIdentifierName = keyof typeof STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS;
+//# sourceMappingURL=standard-object-universal-identifiers.constant.d.ts.map

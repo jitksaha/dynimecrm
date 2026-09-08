@@ -1,0 +1,5 @@
+import { type ApplicationVariableValue } from '../../application/applicationVariablesType';
+import { FieldMetadataType } from '../../types/FieldMetadataType';
+export declare const serializeApplicationVariableValue: (value: ApplicationVariableValue | undefined, type?: FieldMetadataType.ARRAY | FieldMetadataType.BOOLEAN | FieldMetadataType.DATE | FieldMetadataType.DATE_TIME | FieldMetadataType.MULTI_SELECT | FieldMetadataType.NUMBER | FieldMetadataType.NUMERIC | FieldMetadataType.RAW_JSON | FieldMetadataType.RICH_TEXT | FieldMetadataType.SELECT | FieldMetadataType.TEXT) => string;
+export declare const deserializeApplicationVariableValue: (value: string, type?: FieldMetadataType.ARRAY | FieldMetadataType.BOOLEAN | FieldMetadataType.DATE | FieldMetadataType.DATE_TIME | FieldMetadataType.MULTI_SELECT | FieldMetadataType.NUMBER | FieldMetadataType.NUMERIC | FieldMetadataType.RAW_JSON | FieldMetadataType.RICH_TEXT | FieldMetadataType.SELECT | FieldMetadataType.TEXT) => ApplicationVariableValue;
+//# sourceMappingURL=applicationVariableValueSerialization.d.ts.map

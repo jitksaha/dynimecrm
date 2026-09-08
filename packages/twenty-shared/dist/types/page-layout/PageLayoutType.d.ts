@@ -1,0 +1,8 @@
+export declare enum PageLayoutType {
+    RECORD_INDEX = "RECORD_INDEX",
+    RECORD_PAGE = "RECORD_PAGE",
+    DASHBOARD = "DASHBOARD",
+    STANDALONE_PAGE = "STANDALONE_PAGE",
+    RECORD_FORM = "RECORD_FORM"
+}
+//# sourceMappingURL=PageLayoutType.d.ts.map

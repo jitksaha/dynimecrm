@@ -1,0 +1,2 @@
+export declare const isAiSdkPackage: (value: string) => value is "@ai-sdk/amazon-bedrock" | "@ai-sdk/anthropic" | "@ai-sdk/azure" | "@ai-sdk/google" | "@ai-sdk/mistral" | "@ai-sdk/openai" | "@ai-sdk/openai-compatible" | "@ai-sdk/xai";
+//# sourceMappingURL=is-ai-sdk-package.util.d.ts.map

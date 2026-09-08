@@ -1,0 +1,15 @@
+var E = {
+  ARCHIVE: "ARCHIVE",
+  AUDIO: "AUDIO",
+  IMAGE: "IMAGE",
+  PRESENTATION: "PRESENTATION",
+  SPREADSHEET: "SPREADSHEET",
+  TEXT_DOCUMENT: "TEXT_DOCUMENT",
+  VIDEO: "VIDEO",
+  OTHER: "OTHER"
+};
+export {
+  E as FILE_CATEGORIES
+};
+
+//# sourceMappingURL=FileCategory.js.map

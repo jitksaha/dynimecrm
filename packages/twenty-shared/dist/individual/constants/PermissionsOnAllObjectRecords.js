@@ -1,0 +1,8 @@
+var _ = /* @__PURE__ */ (function(E) {
+  return E.READ_ALL_OBJECT_RECORDS = "READ_ALL_OBJECT_RECORDS", E.UPDATE_ALL_OBJECT_RECORDS = "UPDATE_ALL_OBJECT_RECORDS", E.SOFT_DELETE_ALL_OBJECT_RECORDS = "SOFT_DELETE_ALL_OBJECT_RECORDS", E.DESTROY_ALL_OBJECT_RECORDS = "DESTROY_ALL_OBJECT_RECORDS", E;
+})({});
+export {
+  _ as PermissionsOnAllObjectRecords
+};
+
+//# sourceMappingURL=PermissionsOnAllObjectRecords.js.map

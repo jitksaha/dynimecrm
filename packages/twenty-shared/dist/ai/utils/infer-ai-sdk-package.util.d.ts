@@ -1,0 +1,2 @@
+export declare const inferAiSdkPackage: (providerId: string) => "@ai-sdk/amazon-bedrock" | "@ai-sdk/anthropic" | "@ai-sdk/azure" | "@ai-sdk/google" | "@ai-sdk/mistral" | "@ai-sdk/openai" | "@ai-sdk/openai-compatible" | "@ai-sdk/xai";
+//# sourceMappingURL=infer-ai-sdk-package.util.d.ts.map

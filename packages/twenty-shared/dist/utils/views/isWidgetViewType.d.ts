@@ -1,0 +1,2 @@
+export declare const isWidgetViewType: (viewType: "CALENDAR" | "CALENDAR_WIDGET" | "FIELDS_WIDGET" | "KANBAN" | "KANBAN_WIDGET" | "LIST" | "LIST_WIDGET" | "TABLE" | "TABLE_WIDGET") => boolean;
+//# sourceMappingURL=isWidgetViewType.d.ts.map

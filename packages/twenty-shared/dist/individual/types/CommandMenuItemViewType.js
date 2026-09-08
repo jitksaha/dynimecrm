@@ -1,0 +1,8 @@
+var _ = /* @__PURE__ */ (function(E) {
+  return E.GLOBAL = "GLOBAL", E.INDEX_PAGE_BULK_SELECTION = "INDEX_PAGE_BULK_SELECTION", E.INDEX_PAGE_SINGLE_RECORD_SELECTION = "INDEX_PAGE_SINGLE_RECORD_SELECTION", E.INDEX_PAGE_NO_SELECTION = "INDEX_PAGE_NO_SELECTION", E.SHOW_PAGE = "SHOW_PAGE", E.PAGE_EDIT_MODE = "PAGE_EDIT_MODE", E;
+})({});
+export {
+  _ as CommandMenuItemViewType
+};
+
+//# sourceMappingURL=CommandMenuItemViewType.js.map
