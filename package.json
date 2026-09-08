@@ -68,19 +68,11 @@
       "packages/twenty-emails",
       "packages/twenty-ui",
       "packages/twenty-utils",
-      "packages/twenty-zapier",
-      "packages/twenty-website",
-      "packages/twenty-docs",
-      "packages/twenty-e2e-testing",
       "packages/twenty-shared",
       "packages/twenty-sdk",
       "packages/twenty-front-component-renderer",
       "packages/twenty-client-sdk",
-      "packages/twenty-cli",
-      "packages/create-twenty-app",
-      "packages/twenty-codex-plugin",
-      "packages/twenty-oxlint-rules",
-      "packages/twenty-claude-skills"
+      "packages/twenty-oxlint-rules"
     ]
   },
   "prettier": {
