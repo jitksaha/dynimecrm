@@ -1,6 +1,10 @@
-// @ts-check
-/** @type {import('@yarnpkg/types')} */
-const { defineConfig, Yarn } = require('@yarnpkg/types');
+const { defineConfig } = (() => {
+  try {
+    return require('@yarnpkg/types');
+  } catch {
+    return { defineConfig: (c) => c };
+  }
+})();
 const semver = require('semver');
 
 const MONOREPO_ROOT_WORKSPACE = 'twenty';
