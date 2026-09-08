@@ -1,0 +1,1 @@
+import{z as n}from"./utilities-Dwo-CMN9-B4xlzUrU.js";import{t as s}from"./isDefined-Dtu5EYqP-_d6Dqdoe.js";import{t as i}from"./useAtomComponentStateValue-CO6TMomU.js";import{t as m}from"./activeTabIdComponentState-CIWDiGUj.js";var l=(a,t)=>{const e=i(m,a),{hash:r}=n(),o=r.replace("#","");return t.includes(o)?o:s(e)&&t.includes(e)?e:t[0]??null};export{l as t};

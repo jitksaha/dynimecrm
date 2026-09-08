@@ -1,0 +1,1 @@
+import{t as o}from"./useAtomStateValue-CwQXVWpa.js";import{r}from"./dist-C0k9q2wC.js";import{t as s}from"./dateLocaleState-BuXRtlpW.js";import{i as d}from"./date-utils-b24l7XYe.js";var v=()=>{const{i18n:t,_:n}=r(),{localeCatalog:e}=o(s);return{getAddedRelativeDateDescription:a=>{const i=d(a,e);return t._({id:"vLO+NG",values:{beautifiedCreatedAt:i}})}}};export{v as t};

@@ -1,0 +1,1 @@
+import{t as p}from"./jsx-runtime-BmDUFisN.js";import{t as a}from"./dist-x6yBUqMs.js";import{Wi as t}from"./index-BiDxWqTz.js";var e=p(),i=()=>t,s=a(i())({name:"StyledAppChip",class:"s1c0mf99",propsAsIs:!0}),d=({application:r})=>(0,e.jsx)(s,{size:"md",applicationId:r?.id,logoUrl:r?.logoUrl,fallbackApplicationData:{name:r?.name}});export{d as t};

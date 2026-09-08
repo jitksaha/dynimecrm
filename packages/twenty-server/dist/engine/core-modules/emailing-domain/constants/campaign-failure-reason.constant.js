@@ -1,0 +1,24 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "CAMPAIGN_FAILURE_REASON", {
+    enumerable: true,
+    get: function() {
+        return CAMPAIGN_FAILURE_REASON;
+    }
+});
+const CAMPAIGN_FAILURE_REASON = {
+    TEMPORARY_ERROR: 'TEMPORARY_ERROR',
+    CONFIGURATION_ERROR: 'CONFIGURATION_ERROR',
+    INSUFFICIENT_PERMISSIONS: 'INSUFFICIENT_PERMISSIONS',
+    SANDBOX_ACCOUNT: 'SANDBOX_ACCOUNT',
+    SENDING_SUSPENDED: 'SENDING_SUSPENDED',
+    UNSUBSCRIBE_NOT_READY: 'UNSUBSCRIBE_NOT_READY',
+    UNSUBSCRIBE_MULTIPLE_RECIPIENTS: 'UNSUBSCRIBE_MULTIPLE_RECIPIENTS',
+    CLAIM_EXPIRED: 'CLAIM_EXPIRED',
+    RATE_LIMITED: 'RATE_LIMITED',
+    UNKNOWN: 'UNKNOWN'
+};
+
+//# sourceMappingURL=campaign-failure-reason.constant.js.map

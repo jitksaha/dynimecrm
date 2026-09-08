@@ -1,0 +1,49 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "MaterializeCampaignJob", {
+    enumerable: true,
+    get: function() {
+        return MaterializeCampaignJob;
+    }
+});
+const _campaignconstant = require("../../../engine/core-modules/emailing-domain/constants/campaign.constant");
+const _processdecorator = require("../../../engine/core-modules/message-queue/decorators/process.decorator");
+const _processordecorator = require("../../../engine/core-modules/message-queue/decorators/processor.decorator");
+const _messagequeueconstants = require("../../../engine/core-modules/message-queue/message-queue.constants");
+const _messagecampaignmaterializationservice = require("../services/message-campaign-materialization.service");
+function _ts_decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for(var i = decorators.length - 1; i >= 0; i--)if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+function _ts_metadata(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+}
+let MaterializeCampaignJob = class MaterializeCampaignJob {
+    async handle(data) {
+        await this.messageCampaignMaterializationService.processMaterializeJob(data);
+    }
+    constructor(messageCampaignMaterializationService){
+        this.messageCampaignMaterializationService = messageCampaignMaterializationService;
+    }
+};
+_ts_decorate([
+    (0, _processdecorator.Process)(_campaignconstant.MATERIALIZE_CAMPAIGN_JOB),
+    _ts_metadata("design:type", Function),
+    _ts_metadata("design:paramtypes", [
+        typeof MaterializeCampaignJobData === "undefined" ? Object : MaterializeCampaignJobData
+    ]),
+    _ts_metadata("design:returntype", Promise)
+], MaterializeCampaignJob.prototype, "handle", null);
+MaterializeCampaignJob = _ts_decorate([
+    (0, _processordecorator.Processor)(_messagequeueconstants.MessageQueue.campaignQueue),
+    _ts_metadata("design:type", Function),
+    _ts_metadata("design:paramtypes", [
+        typeof _messagecampaignmaterializationservice.MessageCampaignMaterializationService === "undefined" ? Object : _messagecampaignmaterializationservice.MessageCampaignMaterializationService
+    ])
+], MaterializeCampaignJob);
+
+//# sourceMappingURL=materialize-campaign.job.js.map

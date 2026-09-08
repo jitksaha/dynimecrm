@@ -1,0 +1,37 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "OPPORTUNITY_FLAT_OBJECT_MOCK", {
+    enumerable: true,
+    get: function() {
+        return OPPORTUNITY_FLAT_OBJECT_MOCK;
+    }
+});
+const _application = require("twenty-shared/application");
+const _getflatobjectmetadatamock = require("./get-flat-object-metadata.mock");
+const OPPORTUNITY_FLAT_OBJECT_MOCK = (0, _getflatobjectmetadatamock.getFlatObjectMetadataMock)({
+    id: 'e6996bbf-dd41-423a-9324-8546f5b22fa7',
+    nameSingular: 'opportunity',
+    applicationUniversalIdentifier: _application.TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+    namePlural: 'opportunities',
+    labelSingular: 'Opportunity',
+    labelPlural: 'Opportunities',
+    description: 'An opportunity',
+    icon: 'IconTargetArrow',
+    overrides: null,
+    targetTableName: 'DEPRECATED',
+    isRemote: false,
+    isActive: true,
+    isSystem: false,
+    isAuditLogged: true,
+    isSearchable: true,
+    shortcut: 'O',
+    labelIdentifierFieldMetadataId: '5f510348-58e9-4ded-8dbe-144ae3644bd4',
+    imageIdentifierFieldMetadataId: null,
+    isLabelSyncedWithName: false,
+    workspaceId: '20202020-1c25-4d02-bf25-6aeccf7ea419',
+    universalIdentifier: '20202020-9549-49dd-b2b2-883999db8938'
+});
+
+//# sourceMappingURL=opportunity-flat-object.mock.js.map

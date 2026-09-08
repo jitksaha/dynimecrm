@@ -1,0 +1,10 @@
+import{t as u}from"./jsx-runtime-BmDUFisN.js";import{t as p}from"./dist-x6yBUqMs.js";import{t as e}from"./dist-Cg5OofxW.js";import{i as v}from"./surfaces-D3IxB2EF-C1lYE0R9.js";import{t as r}from"./typography-DK5JiCH--B1G2Qv9H.js";import{d}from"./layout-B73JJnBU-DCDyPwRC.js";import{t as A}from"./lib-C3IpGLsk.js";import{t as b}from"./useMutation-Ds2Pb-th.js";import{t as s}from"./graphql-Ky5Kxz2Z.js";import{Mf as j}from"./index-BiDxWqTz.js";import{t as l}from"./SettingsAccountsVisibilityIcon-CjI9F0h0.js";import{t as f}from"./SettingsRadioSettingsCard-B4CFrAvA.js";import{t as y}from"./SettingsOptionCardContentToggle-t4jpR68C.js";var t=u(),g=A`
+  mutation UpdateCalendarChannel($input: UpdateCalendarChannelInput!) {
+    updateCalendarChannel(input: $input) {
+      id
+      visibility
+      isContactAutoCreationEnabled
+      contactAutoCreationPolicy
+    }
+  }
+`,c=p("div")({name:"StyledCardMediaContainer",class:"s13a7ob6",propsAsIs:!1}),x=[{title:{id:"wqF3jl"},description:{id:"MHLapp"},value:s.SHARE_EVERYTHING,cardMedia:(0,t.jsx)(c,{children:(0,t.jsx)(l,{subject:"active",body:"active"})})},{title:{id:"6GBt0m"},description:{id:"zii2Qj"},value:s.METADATA,cardMedia:(0,t.jsx)(c,{children:(0,t.jsx)(l,{subject:"active",body:"inactive"})})}],h=({onChange:i,value:n=s.SHARE_EVERYTHING})=>(0,t.jsx)(f,{name:"event-visibility",options:x,value:n,onChange:i}),E=p("div")({name:"StyledDetailsContainer",class:"sxvfjl",propsAsIs:!1}),Y=({calendarChannel:i})=>{const[n]=b(g),o=a=>{n({variables:{input:{id:i.id,update:a}}})},C=a=>{o({visibility:a})},m=a=>{o({isContactAutoCreationEnabled:a})};return(0,t.jsxs)(E,{children:[(0,t.jsxs)(d,{children:[(0,t.jsx)(r,{title:e._({id:"poC90w"}),description:e._({id:"bQkkFU"})}),(0,t.jsx)(h,{value:i.visibility,onChange:C})]}),(0,t.jsxs)(d,{children:[(0,t.jsx)(r,{title:e._({id:"Y2y0mC"}),description:e._({id:"YRT7ZW"})}),(0,t.jsx)(v,{rounded:!0,children:(0,t.jsx)(y,{Icon:j,title:e._({id:"2zJkmL"}),description:e._({id:"lgw3U4"}),checked:i.isContactAutoCreationEnabled,onChange:()=>{m(!i.isContactAutoCreationEnabled)}})})]})]})};export{Y as t};

@@ -1,0 +1,1 @@
+import{a as t}from"./useAvailableComponentInstanceIdOrThrow-71L1CDtP.js";import{t as e}from"./ContextStoreComponentInstanceContext-B7EKXY8S.js";var a=t({key:"contextStoreCurrentObjectMetadataItemIdComponentState",defaultValue:void 0,componentInstanceContext:e});export{a as t};

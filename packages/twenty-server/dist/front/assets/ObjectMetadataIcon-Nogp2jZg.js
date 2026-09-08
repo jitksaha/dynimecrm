@@ -1,0 +1,1 @@
+import{t as m}from"./jsx-runtime-BmDUFisN.js";import{A as a}from"./icon-CbQE3WoT-B7GiY6Un.js";import{f as e}from"./data-display-Cf60y8W8-BG_djBwj.js";import{t as s}from"./getObjectColorWithFallback-CAdqVJVb.js";var c=m(),l=({objectMetadataItem:r,size:o,stroke:t})=>{const{getIcon:i}=a();return(0,c.jsx)(e,{Icon:i(r?.icon),color:s(r),size:o,stroke:t})};export{l as t};

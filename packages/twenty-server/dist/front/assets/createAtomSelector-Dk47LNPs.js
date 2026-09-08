@@ -1,0 +1,1 @@
+import{o as s}from"./react-BWmhvO0Y.js";import{a as i}from"./routedFlowStateScopeRegistry-J9IAFRg3.js";import{t as p}from"./isDefined-Dtu5EYqP-_d6Dqdoe.js";import{t as c}from"./buildGetHelper-COsfWD8o.js";var A=({key:o,get:a,areEqual:e})=>{const r=s(t=>a({get:c(t)})),m=p(e)?i(r,t=>t,e):r;return m.debugLabel=o,{type:"Selector",key:o,atom:m}};export{A as t};

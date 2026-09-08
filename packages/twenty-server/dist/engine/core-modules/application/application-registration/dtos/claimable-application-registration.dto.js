@@ -1,0 +1,67 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "ClaimableApplicationRegistrationDTO", {
+    enumerable: true,
+    get: function() {
+        return ClaimableApplicationRegistrationDTO;
+    }
+});
+const _graphql = require("@nestjs/graphql");
+function _ts_decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for(var i = decorators.length - 1; i >= 0; i--)if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+function _ts_metadata(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+}
+let ClaimableApplicationRegistrationDTO = class ClaimableApplicationRegistrationDTO {
+};
+_ts_decorate([
+    (0, _graphql.Field)(()=>String),
+    _ts_metadata("design:type", String)
+], ClaimableApplicationRegistrationDTO.prototype, "id", void 0);
+_ts_decorate([
+    (0, _graphql.Field)(()=>String),
+    _ts_metadata("design:type", String)
+], ClaimableApplicationRegistrationDTO.prototype, "universalIdentifier", void 0);
+_ts_decorate([
+    (0, _graphql.Field)(()=>String),
+    _ts_metadata("design:type", String)
+], ClaimableApplicationRegistrationDTO.prototype, "name", void 0);
+_ts_decorate([
+    (0, _graphql.Field)(()=>String, {
+        nullable: true
+    }),
+    _ts_metadata("design:type", Object)
+], ClaimableApplicationRegistrationDTO.prototype, "sourcePackage", void 0);
+_ts_decorate([
+    (0, _graphql.Field)(()=>String, {
+        nullable: true
+    }),
+    _ts_metadata("design:type", Object)
+], ClaimableApplicationRegistrationDTO.prototype, "logoUrl", void 0);
+_ts_decorate([
+    (0, _graphql.Field)(()=>String, {
+        nullable: true
+    }),
+    _ts_metadata("design:type", Object)
+], ClaimableApplicationRegistrationDTO.prototype, "description", void 0);
+_ts_decorate([
+    (0, _graphql.Field)(()=>String, {
+        nullable: true
+    }),
+    _ts_metadata("design:type", Object)
+], ClaimableApplicationRegistrationDTO.prototype, "author", void 0);
+_ts_decorate([
+    (0, _graphql.Field)(()=>Boolean),
+    _ts_metadata("design:type", Boolean)
+], ClaimableApplicationRegistrationDTO.prototype, "isOwned", void 0);
+ClaimableApplicationRegistrationDTO = _ts_decorate([
+    (0, _graphql.ObjectType)('ClaimableApplicationRegistration')
+], ClaimableApplicationRegistrationDTO);
+
+//# sourceMappingURL=claimable-application-registration.dto.js.map

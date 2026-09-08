@@ -1,0 +1,107 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+function _export(target, all) {
+    for(var name in all)Object.defineProperty(target, name, {
+        enumerable: true,
+        get: Object.getOwnPropertyDescriptor(all, name).get
+    });
+}
+_export(exports, {
+    get FLAT_FIELD_METADATA_EMPTY_ARRAY_KEYS () {
+        return FLAT_FIELD_METADATA_EMPTY_ARRAY_KEYS;
+    },
+    get FLAT_FIELD_METADATA_EMPTY_ARRAY_KEY_SET () {
+        return FLAT_FIELD_METADATA_EMPTY_ARRAY_KEY_SET;
+    },
+    get FLAT_FIELD_METADATA_KEY_LOOKUP () {
+        return FLAT_FIELD_METADATA_KEY_LOOKUP;
+    },
+    get FLAT_FIELD_METADATA_SHORT_CODE_BY_KEY () {
+        return FLAT_FIELD_METADATA_SHORT_CODE_BY_KEY;
+    },
+    get FLAT_FIELD_METADATA_SHORT_CODE_LOOKUP () {
+        return FLAT_FIELD_METADATA_SHORT_CODE_LOOKUP;
+    }
+});
+const FLAT_FIELD_METADATA_SHORT_CODE_BY_KEY = {
+    applicationId: '$0',
+    applicationUniversalIdentifier: '$1',
+    calendarEndViewIds: '$2',
+    calendarEndViewUniversalIdentifiers: '$3',
+    calendarViewIds: '$4',
+    calendarViewUniversalIdentifiers: '$5',
+    createdAt: '$6',
+    defaultValue: '$7',
+    description: '$8',
+    fieldPermissionIds: '$9',
+    fieldPermissionUniversalIdentifiers: '$a',
+    icon: '$b',
+    id: '$c',
+    isActive: '$d',
+    isLabelSyncedWithName: '$e',
+    isNullable: '$f',
+    isSystem: '$g',
+    isSystemSideEffect: '$h',
+    isUIEditable: '$i',
+    isUIReadOnly: '$j',
+    isUnique: '$k',
+    kanbanAggregateOperationViewIds: '$l',
+    kanbanAggregateOperationViewUniversalIdentifiers: '$m',
+    label: '$n',
+    mainGroupByFieldMetadataViewIds: '$o',
+    mainGroupByFieldMetadataViewUniversalIdentifiers: '$p',
+    morphId: '$q',
+    name: '$r',
+    objectMetadataId: '$s',
+    objectMetadataUniversalIdentifier: '$t',
+    options: '$u',
+    overrides: '$v',
+    relationTargetFieldMetadataId: '$w',
+    relationTargetFieldMetadataUniversalIdentifier: '$x',
+    relationTargetObjectMetadataId: '$y',
+    relationTargetObjectMetadataUniversalIdentifier: '$z',
+    searchFieldMetadataIds: '$A',
+    searchFieldMetadataUniversalIdentifiers: '$B',
+    settings: '$C',
+    type: '$D',
+    universalIdentifier: '$E',
+    universalSettings: '$F',
+    updatedAt: '$G',
+    viewFieldIds: '$H',
+    viewFieldUniversalIdentifiers: '$I',
+    viewFilterIds: '$J',
+    viewFilterUniversalIdentifiers: '$K',
+    viewSortIds: '$L',
+    viewSortUniversalIdentifiers: '$M',
+    workspaceId: '$N'
+};
+const FLAT_FIELD_METADATA_SHORT_CODE_LOOKUP = new Map(Object.entries(FLAT_FIELD_METADATA_SHORT_CODE_BY_KEY));
+const FLAT_FIELD_METADATA_KEY_LOOKUP = new Map(Object.entries(FLAT_FIELD_METADATA_SHORT_CODE_BY_KEY).map(([key, shortCode])=>[
+        shortCode,
+        key
+    ]));
+const FLAT_FIELD_METADATA_EMPTY_ARRAY_KEYS = [
+    'kanbanAggregateOperationViewIds',
+    'calendarViewIds',
+    'calendarEndViewIds',
+    'mainGroupByFieldMetadataViewIds',
+    'viewFieldIds',
+    'viewFilterIds',
+    'fieldPermissionIds',
+    'viewFieldUniversalIdentifiers',
+    'viewFilterUniversalIdentifiers',
+    'kanbanAggregateOperationViewUniversalIdentifiers',
+    'calendarViewUniversalIdentifiers',
+    'calendarEndViewUniversalIdentifiers',
+    'mainGroupByFieldMetadataViewUniversalIdentifiers',
+    'viewSortIds',
+    'viewSortUniversalIdentifiers',
+    'searchFieldMetadataIds',
+    'searchFieldMetadataUniversalIdentifiers',
+    'fieldPermissionUniversalIdentifiers'
+];
+const FLAT_FIELD_METADATA_EMPTY_ARRAY_KEY_SET = new Set(FLAT_FIELD_METADATA_EMPTY_ARRAY_KEYS);
+
+//# sourceMappingURL=flat-field-metadata-cache-codec.constant.js.map

@@ -1,0 +1,1 @@
+import{a as t}from"./types-BVPyJxl2-BGV2ej5I.js";import{t as o}from"./createAtomSelector-Dk47LNPs.js";import{t as n}from"./sidePanelNavigationStackState-hIpsyP3w.js";var s=o({key:"side-panel/sidePanelPageInfoSelector",get:({get:a})=>{const e=a(n).at(-1);return{page:e?.page??t.CommandMenuDisplay,title:e?.pageTitle,Icon:e?.pageIcon,instanceId:e?.pageId??""}}});export{s as t};

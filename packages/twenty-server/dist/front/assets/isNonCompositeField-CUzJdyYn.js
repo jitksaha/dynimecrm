@@ -1,0 +1,1 @@
+import{N as E}from"./types-BVPyJxl2-BGV2ej5I.js";var r=T=>[E.UUID,E.TEXT,E.DATE_TIME,E.DATE,E.NUMBER,E.NUMERIC,E.BOOLEAN,E.RATING,E.SELECT,E.MULTI_SELECT,E.POSITION,E.RAW_JSON,E.ARRAY].includes(T);export{r as t};

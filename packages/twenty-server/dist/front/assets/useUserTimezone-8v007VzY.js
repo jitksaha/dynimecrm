@@ -1,0 +1,1 @@
+import{t as r}from"./useAtomStateValue-CwQXVWpa.js";import{t as s}from"./currentWorkspaceMemberState-C5AixFzT.js";var i=()=>{const t=r(s),e=Intl.DateTimeFormat().resolvedOptions().timeZone,o=t?.timeZone!=="system"?t?.timeZone??e:e;return{userTimezone:o,isSystemTimezone:o===e,systemTimeZone:e}};export{i as t};

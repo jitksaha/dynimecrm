@@ -1,21 +1,8 @@
 {
   "private": true,
   "devDependencies": {
-    "@nx/jest": "22.7.8",
-    "@nx/js": "22.7.8",
-    "@nx/react": "22.7.8",
-    "@nx/storybook": "22.7.8",
-    "@nx/vite": "22.7.8",
-    "@nx/web": "22.7.8",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
     "@yarnpkg/types": "^4.0.0",
-    "concurrently": "^8.2.2",
-    "http-server": "^14.1.1",
-    "nx": "22.7.8",
-    "oxfmt": "0.50.0",
-    "tsx": "^4.17.0",
-    "verdaccio": "^6.3.1"
+    "tsx": "^4.17.0"
   },
   "engines": {
     "node": "^24.5.0",
@@ -64,16 +51,10 @@
   },
   "workspaces": {
     "packages": [
-      "packages/twenty-front",
       "packages/twenty-server",
       "packages/twenty-emails",
-      "packages/twenty-ui",
-      "packages/twenty-utils",
       "packages/twenty-shared",
-      "packages/twenty-sdk",
-      "packages/twenty-front-component-renderer",
-      "packages/twenty-client-sdk",
-      "packages/twenty-oxlint-rules"
+      "packages/twenty-client-sdk"
     ]
   },
   "prettier": {

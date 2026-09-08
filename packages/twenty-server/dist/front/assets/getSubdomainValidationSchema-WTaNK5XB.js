@@ -1,0 +1,1 @@
+import{Dn as s}from"./schemas-pe6acdm4.js";import{br as i,mr as m}from"./utils-wA24uq8M-QF6HonJV.js";import{t as e}from"./dist-Cg5OofxW.js";var d=()=>s().min(1,{message:e._({id:"la3+yi"})}).max(30,{message:e._({id:"d5CFUo"})}).regex(m,{message:e._({id:"oTTQsc"})}).refine(a=>!i.includes(a.toLowerCase()),{message:e._({id:"Ryrt8E"})});export{d as t};
